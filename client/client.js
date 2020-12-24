@@ -1,5 +1,5 @@
 
-var conn = new WebSocket("ws://" + localStorage["signaling_server_ip"]);
+var conn = new WebSocket("wss://" + localStorage["signaling_server_ip"]);
 var name = "";
 var other_users = 0;
 var cStream;
