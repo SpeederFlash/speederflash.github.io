@@ -1,7 +1,9 @@
 body{
   background-color: #0D0D11;
+  margin: 0;
   color: #eeffff99;
   font-family: "Verdana", Verdana, sans-serif;
+  overflow: hidden;
 }
 button{
   border-radius: 25px;
@@ -11,6 +13,13 @@ button{
   height: 50px;
   width: 180px;
   font-family: "Verdana", Verdana, sans-serif;
+}
+.stars{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .centered{

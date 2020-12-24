@@ -4,12 +4,9 @@
     <body>
       <p1 id = "roomId">
         <div>
-          <div id = "errHandler"></div>
           <script>
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            localStorage.setItem("id", urlParams.get("id"));
-            document.getElementById("errHandler").innerHTML = localStorage.getItem("id");
             var ipArray = [];
             function signaling_server_ip() {
               const ip = document.getElementById("ipInput").value;
@@ -31,10 +28,9 @@
               else{
                 localStorage["signaling_server_ip"] = ip;
                 var url_str = window.location.href;
-                url_str = url_str.substring(0,(url_str.length-31));
+                url_str = url_str.substring(0,(url_str.length-11));
                 url_str += "room.html";
                 var url = new URL(url_str);
-                url.searchParams.append('id', localStorage["id"]);
                 window.location.href = url;
               }
             }

@@ -8,48 +8,47 @@
       <p1>
         <div>
           <script>
-            const cyrb53 = function(str, seed = 0) {
-              let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
-              for (let i = 0, ch; i < str.length; i++) {
-              ch = str.charCodeAt(i);
-                h1 = Math.imul(h1 ^ ch, 2654435761);
-                h2 = Math.imul(h2 ^ ch, 1597334677);
-              }
-              h1 = Math.imul(h1 ^ (h1>>>16), 2246822507) ^ Math.imul(h2 ^ (h2>>>13), 3266489909);
-              h2 = Math.imul(h2 ^ (h2>>>16), 2246822507) ^ Math.imul(h1 ^ (h1>>>13), 3266489909);
-              return 4294967296 * (2097151 & h2) + (h1>>>0);
-            };
             function createRoom() {
-              const createRoomID = cyrb53(Date.now().toString());
               var url_str = window.location.href;
               url_str = url_str.substring(0,(url_str.length-10));
               url_str += "create.html";
               var url = new URL(url_str);
-              url.searchParams.append('id', createRoomID);
               window.location.href = url;
             }
-            function enterRoom() {
-              const room = document.getElementById("roominput").value;
-              const room_id = Number(room);
-              if(room == "" || Number.isNaN(room_id)){
-                document.getElementById("roominput").value = "Please Enter A Room ID";
+            function signaling_server_ip() {
+              const ip = document.getElementById("ipInput").value;
+              var ipArray;
+              var ipPort = 0;
+              try{
+                ipPort = parseInt(ip.split(":")[1]);
+                ipArray = [];
+                ipArray.push(parseInt(ip.split(":")[0].split(".")[0]));
+                ipArray.push(parseInt(ip.split(":")[0].split(".")[1]));
+                ipArray.push(parseInt(ip.split(":")[0].split(".")[2]));
+                ipArray.push(parseInt(ip.split(":")[0].split(".")[3]));
+              }
+              catch(err) {
+                document.getElementById("errHandler").innerHTML = err.message;
+              }
+              if(ipArray.length != 4 || ipPort == 0 || isNaN(ipArray[0]) || isNaN(ipArray[1]) || isNaN(ipArray[2]) || isNaN(ipArray[3])){
+                document.getElementById("ipInput").value = "Please Enter An IP";
               }
               else{
+                localStorage["signaling_server_ip"] = ip;
                 var url_str = window.location.href;
-                url_str = url_str.substring(0,(url_str.length-localStorage["id"].length));
+                url_str = url_str.substring(0,(url_str.length-10));
                 url_str += "room.html";
                 var url = new URL(url_str);
-                url.searchParams.append('id', room_id);
                 window.location.href = url;
               }
             }
           </script>
         </div>
         <div class = "pctop33">
-          <button onclick="enterRoom()">Enter Room</button>
+          <button onclick="signaling_server_ip()">Enter IP</button>
         </div>
         <div class = "pctop40">
-          <input id="roominput" class="prettyinput"></input>
+          <input id="ipInput" class="prettyinput" value="Enter a Signaling Server IP"></input>
         </div>
         <div class = "pcbot33">
           <button onclick="createRoom()">Create Room</button>
