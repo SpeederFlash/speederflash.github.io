@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+  <html>
+    <head><meta content="text/html;charset=utf-8" http-equiv="Content-Type"><meta content="utf-8" http-equiv="encoding"><link rel = "stylesheet" href = "style.css"></head>
+    <body>
+      <p1>
+        <div id = "roomId"></div>
+        <div>
+          <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get("id");
+            document.getElementById("roomId").innerHTML = id;
+            console.log(localStorage.getItem("signaling_server_ip"))
+          </script>
+        </div>
+        <div>
+          <video autoplay id = "au"></video>
+          <video autoplay id = "other"></video>
+          <script src = "client/client.js">></script>
+        </div>
+        <div class="slidecontainer">
+          <input type="range" min="0" max="100" class="slider" id="auSld">
+        </div>
+        <div>
+          <input class="prettyinput" type = "text" id="nameInput">
+          <button onclick="login()"></button>
+        </div>
+        <div>
+          <button onclick="join_voice()">Join Voice</button>
+        </div>
+        </script>
+      </p1>
+    </body>
+  </html>
