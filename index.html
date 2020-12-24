@@ -35,10 +35,8 @@
               }
               else{
                 localStorage["signaling_server_ip"] = ip;
-                var url_str = window.location.href;
-                url_str = url_str.substring(0,(url_str.length-10));
-                url_str += "room.html";
-                var url = new URL(url_str);
+                var url = new URL(window.location.href);
+                url = new URL("/room.html", url);
                 window.location.href = url;
               }
             }
