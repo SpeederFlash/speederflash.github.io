@@ -10,9 +10,10 @@
             console.log(localStorage.getItem("signaling_server_ip"))
           </script>
         </div>
+        <div id="audio_srcs">
+          <audio autoplay id = "my_audio"></audio>
+        </div>
         <div>
-          <video autoplay id = "au"></video>
-          <video autoplay id = "other"></video>
           <script src = "client/client.js">></script>
         </div>
         <div class="slidecontainer">
@@ -20,10 +21,9 @@
         </div>
         <div>
           <input class="prettyinput" type = "text" id="nameInput">
-          <button onclick="login()"></button>
         </div>
         <div>
-          <button onclick="join_voice()">Join Voice</button>
+          <button onclick="login()">Join Voice</button>
         </div>
         </script>
       </p1>
