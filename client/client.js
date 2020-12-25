@@ -36,7 +36,6 @@ else {
 }
 
 conn.onmessage = function (message) {
-  console.log("Recieve", message.data);
   var data = JSON.parse(message.data);
   switch(data.type) {
     case "login":
@@ -118,7 +117,9 @@ function onUserAdd(oname){
 function onExisting(arr){
   if(arr.length != 0){
     for(i in arr){
+      console.log(i);
       var oname = arr[i];
+      console.log(oname);
       var configuration = { iceServers: [{urls: ["stun:webrtc.breakingpacket.com:3478"]},{  urls: ["turn:webrtc.breakingpacket.com:3478"], username: "amongus", credential: "p@ssword1"  }], sdpSemantics: 'unified-plan' };
       client_conn[oname] = new RTCPeerConnection(configuration);
       client_conn[oname].addStream(cStream.srcObject);
@@ -207,7 +208,5 @@ function login() {
 }
 
 function send(message) {
-  console.log("Sending");
-  console.log(message);
   conn.send(JSON.stringify(message));
 }
