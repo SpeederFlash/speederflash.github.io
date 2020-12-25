@@ -121,45 +121,7 @@ function onExisting(arr){
       console.log(i);
       var oname = arr[i];
       console.log(oname);
-      var configuration = { iceServers: [{urls: ["stun:webrtc.breakingpacket.com:3478"]},{  urls: ["turn:webrtc.breakingpacket.com:3478"], username: "amongus", credential: "p@ssword1"  }], sdpSemantics: 'unified-plan' };
-      client_conn[oname] = new RTCPeerConnection(configuration);
-      client_conn[oname].addStream(cStream.srcObject);
-
-      console.log("RTC Conn created (existing)");
-      console.log(client_conn[oname]);
-
-      client_conn[oname].createOffer(function (o) {
-        console.log("Sending offer to ", oname);
-        send({
-          type: "offer",
-          name: oname,
-          offer: o,
-          me: name,
-          ret: false
-        });
-        client_conn[oname].setLocalDescription(o);
-      }, function (e){
-        alert("Critical Error");
-      });
-
-      client_conn[oname].onaddstream = function (e) {
-        var au_src = document.getElementById("audio_srcs");
-        var au_src_child = document.createElement('audio');
-        au_src_child.id = oname;
-        au_src_child.autoplay = true;
-        au_src_child.srcObject = e.stream;
-        au_src.appendChild(au_src_child);
-      }
-      client_conn[oname].onicecandidate = function (event) {
-        if(event.candidate) {
-          send({
-            type: "candidate",
-            candidate: event.candidate,
-            name: oname,
-            sender: name
-          })
-        }
-      }
+      onUserAdd(oname);
     }
   }
   else{
