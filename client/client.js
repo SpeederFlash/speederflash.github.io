@@ -116,6 +116,7 @@ function onUserAdd(oname){
 
 function onExisting(arr){
   if(arr.length != 0){
+    console.log("inexist");
     for(i in arr){
       console.log(i);
       var oname = arr[i];
