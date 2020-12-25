@@ -74,7 +74,7 @@ function onLogin(success, u, atoken){
 }
 
 function onUserAdd(oname){
-  var configuration = { iceServers: [{urls: "stun:webrtc.breakingpacket.com:3458"},{ urls: "turn:webrtc.breakingpacket.com:3478", username: "username", credential: "auth_token" }], sdpSemantics: 'unified-plan' };
+  var configuration = { iceServers: [{urls: "stun:webrtc.breakingpacket.com:3458"},{ urls: "turn:webrtc.breakingpacket.com:3478", username: "username", credentials: "auth_token" }], sdpSemantics: 'unified-plan' };
   client_conn[oname] = new RTCPeerConnection(configuration);
   client_conn[oname].addStream(cStream.srcObject);
 
@@ -105,7 +105,7 @@ function onExisting(arr){
   if(arr.length != 0){
     for(i in arr){
       var oname = arr[i];
-      var configuration = { iceServers: [{urls: "stun:webrtc.breakingpacket.com:3478"},{  urls: "turn:webrtc.breakingpacket.com:3478", username: "username", credential: "auth_token"  }], sdpSemantics: 'unified-plan' };
+      var configuration = { iceServers: [{urls: "stun:webrtc.breakingpacket.com:3478"},{  urls: "turn:webrtc.breakingpacket.com:3478", username: "username", credentials: "auth_token"  }], sdpSemantics: 'unified-plan' };
       client_conn[oname] = new RTCPeerConnection(configuration);
       client_conn[oname].addStream(cStream.srcObject);
 
