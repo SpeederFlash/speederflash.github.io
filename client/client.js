@@ -81,6 +81,20 @@ function onUserAdd(oname){
   console.log("RTC Conn created (user add)");
   console.log(client_conn[oname]);
 
+  client_conn[oname].createOffer(function (o) {
+    console.log("Sending offer to ", oname);
+    send({
+      type: "offer",
+      name: oname,
+      offer: o,
+      me: name,
+      ret: false
+    });
+    client_conn[oname].setLocalDescription(o);
+  }, function (e){
+    alert("Critical Error");
+  });
+
   client_conn[oname].onaddstream = function (e) {
     var au_src = document.getElementById("audio_srcs");
     var au_src_child = document.createElement('audio');
