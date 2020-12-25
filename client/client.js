@@ -101,7 +101,7 @@ function onExisting(arr){
   if(arr.length != 0){
     for(i in arr){
       var oname = arr[i];
-      var configuration = { "iceServers": [{ "urls": ["stun:stun.1.google.com:19302", "stun:stun1.l.google.com:19302"] }] };
+      var configuration = { "iceServers": [{ "urls": ["stun:stun.1.google.com:19302", "stun:stun1.l.google.com:19302", "stun.sipnet.net:3478", "stun.stunprotocol.org:3478"] }] };
       client_conn[oname] = new RTCPeerConnection(configuration);
       client_conn[oname].addStream(cStream.srcObject);
 
