@@ -105,7 +105,7 @@ function onExisting(arr){
   if(arr.length != 0){
     for(i in arr){
       var oname = arr[i];
-      var configuration = { iceServers: [{urls: "stun:52.33.214.209:3458"},{  urls: "turn:52.33.214.209:3478", username: username, credential: auth-token  }], sdpSemantics: 'unified-plan' };
+      var configuration = { iceServers: [{urls: "stun:52.33.214.209:3458"},{  urls: "turn:52.33.214.209:3478", username: username, credential: auth_token  }], sdpSemantics: 'unified-plan' };
       client_conn[oname] = new RTCPeerConnection(configuration);
       client_conn[oname].addStream(cStream.srcObject);
 
