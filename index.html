@@ -16,6 +16,7 @@
               window.location.href = url;
             }
             function signaling_server_ip() {
+              console.log("hereh");
               const ip = document.getElementById("ipInput").value;
               var ipArray;
               var ipPort = 0;
@@ -42,11 +43,11 @@
             }
           </script>
         </div>
-        <div class = "pctop33">
-          <input id="ipInput" class="prettyinput" value="Enter a Signaling Server IP"></input>
-        </div>
         <div class = "pctop40">
           <button onclick="signaling_server_ip()">Enter IP</button>
+        </div>
+        <div class = "pctop33">
+          <input id="ipInput" class="prettyinput" value="Enter a Signaling Server IP"></input>
         </div>
         <div class = "pcbot33">
           <button onclick="createRoom()">Create Room</button>

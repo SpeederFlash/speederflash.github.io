@@ -3,6 +3,8 @@ var conn = new WebSocket("ws://" + localStorage["signaling_server_ip"]);
 var name = "";
 var other_users = 0;
 var cStream;
+var username;
+var auth_token;
 var client_conn = {};
 var conn_user;
 console.log(conn);
@@ -38,7 +40,7 @@ conn.onmessage = function (message) {
   var data = JSON.parse(message.data);
   switch(data.type) {
     case "login":
-      onLogin(data.success);
+      onLogin(data.success,data.username,data.authkey);
       break;
     case "user_add":
       onUserAdd(data.name);
@@ -60,17 +62,19 @@ conn.onmessage = function (message) {
   }
 };
 
-function onLogin(success){
+function onLogin(success, u, atoken){
   if(success === false){
     alert("Try another Username");
   }
   else{
+    username = u;
+    auth_token = atoken;
     join_voice();
   }
 }
 
 function onUserAdd(oname){
-  var configuration = { "iceServers": [{ "urls": "stun:stun.1.google.com:19302" }] };
+  var configuration = { iceServers: [{urls: "stun:52.33.214.209:3458"},{ urls: "turn:52.33.214.209:3478", username: username, credential: auth_token }], sdpSemantics: 'unified-plan' };
   client_conn[oname] = new RTCPeerConnection(configuration);
   client_conn[oname].addStream(cStream.srcObject);
 
@@ -101,7 +105,7 @@ function onExisting(arr){
   if(arr.length != 0){
     for(i in arr){
       var oname = arr[i];
-      var configuration = { "iceServers": [{ "urls": ["stun:stun.1.google.com:19302", "stun:stun1.l.google.com:19302", "stun.sipnet.net:3478", "stun.stunprotocol.org:3478"] }] };
+      var configuration = { iceServers: [{urls: "stun:52.33.214.209:3458"},{  urls: "turn:52.33.214.209:3478", username: username, credential: auth-token  }], sdpSemantics: 'unified-plan' };
       client_conn[oname] = new RTCPeerConnection(configuration);
       client_conn[oname].addStream(cStream.srcObject);
 
